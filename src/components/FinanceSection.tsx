@@ -3,14 +3,19 @@ import { Animate } from 'react-simple-animate'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper/modules'
 
-// Import Swiper styles
+// 导入 Swiper 基础样式
 import 'swiper/css'
+// 导入 Swiper 导航和分页样式
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-// Import responsive styles
+// 导入响应式样式
 import '../styles/responsive.scss'
 
+/**
+ * 轮播图数据接口定义
+ * @interface SlideData
+ */
 interface SlideData {
   imageUrl: string
   amount: string
@@ -21,6 +26,7 @@ interface SlideData {
   requestAmount?: string
 }
 
+// 轮播图数据
 const slides: SlideData[] = [
   {
     imageUrl:
@@ -70,7 +76,12 @@ const slides: SlideData[] = [
   }
 ]
 
+/**
+ * 金融服务展示组件
+ * 展示金融交易信息的轮播图组件，包含标题、描述文本和交易卡片轮播
+ */
 const FinanceSection: React.FC = () => {
+  // 当前激活的轮播图索引
   const [activeIndex, setActiveIndex] = useState(0)
 
   return (
@@ -94,11 +105,17 @@ const FinanceSection: React.FC = () => {
 
       <div className="swiper-container relative w-full overflow-hidden max-w-7xl mx-auto px-0 sm:px-4 md:px-6">
         <Swiper
+          // 启用分页和自动播放模块
           modules={[Pagination, Autoplay]}
+          // 启用循环模式
           loop={true}
+          // 默认显示 1.1 个幻灯片
           slidesPerView={1.1}
+          // 幻灯片之间的间距
           spaceBetween={8}
+          // 关闭居中模式
           centeredSlides={false}
+          // 自动播放配置
           autoplay={{
             delay: 3000,
             disableOnInteraction: false
@@ -111,6 +128,7 @@ const FinanceSection: React.FC = () => {
             bulletActiveClass: 'swiper-pagination-bullet-active'
           }}
           className="w-full h-full"
+          // 响应式断点配置
           breakpoints={{
             320: {
               slidesPerView: 1.1,
@@ -159,6 +177,7 @@ const FinanceSection: React.FC = () => {
                       {slide.currency}
                     </button>
                   </div>
+                  // 根据是否为儿童账户显示不同的内容
                   {slide.isKiddo ? (
                     <div className="mt-auto absolute bottom-3 sm:bottom-6 md:bottom-8 left-0 right-0 flex items-center justify-between bg-white/10 backdrop-blur-md rounded-full px-2 sm:px-4 py-1.5 sm:py-2">
                       <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-gray-300"></div>
