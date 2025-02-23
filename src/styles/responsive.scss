@@ -1,0 +1,117 @@
+// 断点变量
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 1024px;
+
+// 混合宏：移动端样式（≤768px）
+@mixin mobile {
+  @media (max-width: #{$breakpoint-mobile}) {
+    text-align: left;
+    @content;
+  }
+}
+
+// 混合宏：平板端样式（>768px && ≤1024px）
+@mixin tablet {
+  @media (min-width: #{$breakpoint-mobile + 1px}) and (max-width: #{$breakpoint-tablet}) {
+    @content;
+  }
+}
+
+// 混合宏：桌面端样式（>1024px）
+@mixin desktop {
+  @media (min-width: #{$breakpoint-tablet + 1px}) {
+    @content;
+  }
+}
+
+// FinanceSection组件的响应式样式
+.finance-section {
+  // 标题样式
+  h1 {
+    font-size: 28px;
+    line-height: 34px;
+
+    @include tablet {
+      font-size: 2.25rem; // text-3xl
+    }
+
+    @include desktop {
+      font-size: 3rem; // text-5xl
+    }
+  }
+
+  // 描述文本样式
+  p {
+    font-size: 15px;
+    line-height: 22px;
+
+    @include tablet {
+      font-size: 1rem;
+    }
+
+    @include desktop {
+      font-size: 1.125rem;
+    }
+  }
+
+  // 按钮样式
+  .get-started-button {
+    padding: 14px 24px;
+    font-size: 15px;
+    line-height: 22px;
+
+    @include tablet {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+    }
+
+    @include desktop {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+  }
+
+  // 轮播容器样式
+  .swiper-container {
+    height: auto;
+    min-height: 600px;
+  
+    @include mobile {
+      min-height: 450px;
+      padding: 0 10px;
+    }
+  
+    @include tablet {
+      min-height: 600px;
+      padding: 0 20px;
+    }
+  
+    @include desktop {
+      min-height: 750px;
+      padding: 0 30px;
+    }
+  }
+  
+  .swiper-slide {
+    .slide-content {
+      height: auto;
+      aspect-ratio: 3/4;
+  
+      @include mobile {
+        aspect-ratio: 3/4;
+      }
+  
+      @include tablet {
+        aspect-ratio: 3/4;
+      }
+  
+      @include desktop {
+        aspect-ratio: 3/4;
+      }
+  
+      &.active {
+        transform: scale(1.02);
+      }
+    }
+  }
+}
